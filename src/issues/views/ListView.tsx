@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { IssueList } from '../components/IssueList'
-import { LabelPicker } from '../components/LabelPicker'
+import { IssueList, LabelPicker } from '../components'
 
 export const ListView = () => {
   const [selectedLabels, setSelectedLabels] = useState<string[]>([])
