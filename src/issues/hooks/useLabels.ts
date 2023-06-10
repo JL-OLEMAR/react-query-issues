@@ -1,23 +1,29 @@
 import { useQuery } from '@tanstack/react-query'
 import { githubApi } from '../../api/githubApi'
 import { sleep } from '../../helpers/sleep'
-import { Label } from '../interfaces/label'
+import { Label } from '../interfaces'
 
 const getLabels = async (): Promise<Label[]> => {
   await sleep(2)
 
   const { data } = await githubApi.get<Label[]>('/labels')
+  // const { data } = await githubApi.get<Label[]>('/labels', {
+  //   headers: {
+  //     Authorization: null
+  //   }
+  // })
   return data
 }
 
-export default function useLabels() {
+export function useLabels() {
   const labelsQuery = useQuery(
     ['labels'],
     getLabels,
     {
-      // staleTime: 1000 * 60 * 60, // 1 hour
-      // placeholderData: [],
-      initialData: [
+      staleTime: 1000 * 60 * 60, // 1 hour - evita hacer fetching instantaneamente, se repeta el tiempo establecido
+      // initialData: [hereData], muestra la data precargada pero espera que staleTime para hacer la petición a la Api,
+      // placeholderData: [hereData], muestra la data precargada e inmediatamente hace la petición a la Api SIN esperar al staleTime
+      placeholderData: [
         {
           id: 725156255,
           node_id: 'MDU6TGFiZWw3MjUxNTYyNTU=',
