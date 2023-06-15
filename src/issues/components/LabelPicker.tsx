@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import LoadingIcon from '../../shared/components/LoadingIcon'
 import { useLabels } from '../hooks'
+import { LoadingIcon } from '../../shared'
 
 interface Props {
   selectedLabels: string[]

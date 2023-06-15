@@ -1,7 +1,7 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { IssueComment } from '../components'
-import LoadingIcon from '../../shared/components/LoadingIcon'
 import { useIssue } from '../hooks'
+import { IssueComment } from '../components'
+import { LoadingIcon } from '../../shared'
 
 export const IssueView = () => {
   const { id = '0' } = useParams()

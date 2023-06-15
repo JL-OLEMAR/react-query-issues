@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { IssueList, LabelPicker } from '../components'
-import LoadingIcon from '../../shared/components/LoadingIcon'
 import { useIssues } from '../hooks'
+import { IssueList, LabelPicker } from '../components'
+import { LoadingIcon } from '../../shared'
 
 export const ListView = () => {
   const [selectedLabels, setSelectedLabels] = useState<string[]>([])
