@@ -54,11 +54,11 @@ export interface User {
   site_admin: boolean
 }
 
-export enum Type {
+export const enum Type {
   User = 'User',
 }
 
-export enum AuthorAssociation {
+export const enum AuthorAssociation {
   Collaborator = 'COLLABORATOR',
   Contributor = 'CONTRIBUTOR',
   Member = 'MEMBER',
@@ -75,7 +75,7 @@ export interface Label {
   description?: string | null
 }
 
-export enum Color {
+export const enum Color {
   B60205 = 'b60205',
   D4C5F9 = 'd4c5f9',
   E7E7E7 = 'e7e7e7',
@@ -83,7 +83,7 @@ export enum Color {
   The9149D1 = '9149d1',
 }
 
-export enum Name {
+export const enum Name {
   CLASigned = 'CLA Signed',
   ComponentDeveloperTools = 'Component: Developer Tools',
   ReactCoreTeam = 'React Core Team',
@@ -91,7 +91,7 @@ export enum Name {
   TypeBug = 'Type: Bug',
 }
 
-export enum NodeID {
+export const enum NodeID {
   MDU6TGFiZWw0MDkyOTE1MQ = 'MDU6TGFiZWw0MDkyOTE1MQ==',
   MDU6TGFiZWw3MTA1NzM1OTU = 'MDU6TGFiZWw3MTA1NzM1OTU=',
   MDU6TGFiZWwxNTU5ODQxNjA = 'MDU6TGFiZWwxNTU5ODQxNjA=',
@@ -120,7 +120,7 @@ export interface Reactions {
   eyes: number
 }
 
-export enum State {
+export const enum State {
   Open = 'open',
   Closed = 'closed'
 }
