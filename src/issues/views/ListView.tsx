@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { useIssues } from '../hooks'
 import { IssueList, LabelPicker } from '../components'
 import { LoadingIcon } from '../../shared'
+import { State } from '../interfaces'
 
 export const ListView = () => {
   const [selectedLabels, setSelectedLabels] = useState<string[]>([])
-  const { issuesQuery } = useIssues()
+  const [stateIssues, setStateIssues] = useState<State>()
+  const { issuesQuery } = useIssues({ labels: selectedLabels, stateIssues })
 
   const onLabelChanged = (labelName: string) => {
     (selectedLabels.includes(labelName))
@@ -18,8 +20,14 @@ export const ListView = () => {
       <div className='col-8'>
         {
           issuesQuery.isLoading
-            ? <LoadingIcon />
-            : <IssueList issues={issuesQuery.data ?? []} />
+            ? (<LoadingIcon />)
+            : (
+              <IssueList
+                issues={(issuesQuery.data) ?? []}
+                stateIssues={stateIssues}
+                onStateChanged={(newState) => setStateIssues(newState)}
+              />
+            ) // eslint-disable-line
         }
       </div>
 
