@@ -4,6 +4,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { FiCheckCircle, FiInfo, FiMessageSquare } from 'react-icons/fi'
 
 // import { getIssueComments, getIssueInfo } from '../../api'
+import { Labels } from './Labels'
 import { Issue, State } from '../interfaces'
 
 interface Props {
@@ -56,19 +57,24 @@ export const IssueItem: FC<Props> = ({ issue }) => {
         }
 
         <div className='d-flex flex-column flex-fill px-2'>
-          <span>
-            {issue.title}
-          </span>
+          <span>{issue.title}</span>
           <span className='issue-subinfo'>
             {`#${issue.number} ${issue.state} 2 days ago by `}
             <span className='fw-bold'>{issue.user.login}</span>
           </span>
+          <div>
+            {
+              issue.labels.map((label) => (
+                <Labels key={label.id} label={label} />
+              ))
+            }
+          </div>
         </div>
 
         <div className='d-flex align-items-center'>
           <img
             src={issue.user.avatar_url}
-            alt={issue.user.login}
+            alt={`${issue.user.login} avatar`}
             className='avatar'
           />
           <span className='px-2'>{issue.comments}</span>

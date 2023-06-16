@@ -14,6 +14,18 @@ export const getIssues = async ({ labels = [], stateIssues }: Props): Promise<Is
 
   if (stateIssues) params.append('state', stateIssues)
 
+  if (labels.length > 0) {
+    // 'lab1, lab2, lab3' ONE STRING, no ['lab1', 'lab2', 'lab3']
+    const labelsString = labels.join(',')
+    params.append('labels', labelsString)
+  }
+
+  // Display the first page
+  params.append('page', '1')
+
+  // that each page will have 5 items
+  params.append('per_page', '5')
+
   const { data } = await githubApi.get<Issue[]>('/issues?', { params })
   return data
 }
