@@ -5,6 +5,7 @@ import { FiCheckCircle, FiInfo, FiMessageSquare } from 'react-icons/fi'
 
 // import { getIssueComments, getIssueInfo } from '../../api'
 import { Labels } from './Labels'
+import { getRelativeTime } from '../../helpers'
 import { Issue, State } from '../interfaces'
 
 interface Props {
@@ -14,6 +15,9 @@ interface Props {
 export const IssueItem: FC<Props> = ({ issue }) => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+
+  const startedTime = +new Date(issue.created_at)
+  const relativeTimeAgo = getRelativeTime(startedTime)
 
   // 1) Pre carga la data, y espera como argumentos la KEY la FUNCTION que retorna la data (return FUNCTION de la API).
   // WARNING: tener cuidado porque hace demasiadas perticiones HTTPs y genera mucho consumo de recursos, en este caso al hacer hover.
@@ -59,7 +63,7 @@ export const IssueItem: FC<Props> = ({ issue }) => {
         <div className='d-flex flex-column flex-fill px-2'>
           <span>{issue.title}</span>
           <span className='issue-subinfo'>
-            {`#${issue.number} ${issue.state} 2 days ago by `}
+            {`#${issue.number} ${issue.state} ${relativeTimeAgo} by `}
             <span className='fw-bold'>{issue.user.login}</span>
           </span>
           <div>
