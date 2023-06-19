@@ -7,7 +7,7 @@ import { State } from '../interfaces'
 export const ListView = () => {
   const [selectedLabels, setSelectedLabels] = useState<string[]>([])
   const [stateIssues, setStateIssues] = useState<State>()
-  const { issuesQuery } = useIssues({ labels: selectedLabels, stateIssues })
+  const { issuesQuery, page, prevPage, nextPage } = useIssues({ labels: selectedLabels, stateIssues })
 
   const onLabelChanged = (labelName: string) => {
     (selectedLabels.includes(labelName))
@@ -29,6 +29,23 @@ export const ListView = () => {
               />
             ) // eslint-disable-line
         }
+
+        {/* Pagination */}
+        <div className='d-flex justify-content-between align-items-center mt-2'>
+          <button
+            onClick={prevPage}
+            disabled={issuesQuery.isFetching || page === 1}
+            className='btn btn-outline-primary'
+          >Prev
+          </button>
+          <span>{page}</span>
+          <button
+            onClick={nextPage}
+            disabled={issuesQuery.isFetching}
+            className='btn btn-outline-primary'
+          >Next
+          </button>
+        </div>
       </div>
 
       <div className='col-4'>

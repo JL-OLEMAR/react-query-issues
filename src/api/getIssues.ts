@@ -5,9 +5,10 @@ import { Issue, State } from '../issues/interfaces'
 interface Props {
   labels: string[]
   stateIssues?: State
+  page?: number
 }
 
-export const getIssues = async ({ labels = [], stateIssues }: Props): Promise<Issue[]> => {
+export const getIssues = async ({ labels = [], stateIssues, page = 1 }: Props): Promise<Issue[]> => {
   await sleep(2)
 
   const params = new URLSearchParams()
@@ -21,7 +22,7 @@ export const getIssues = async ({ labels = [], stateIssues }: Props): Promise<Is
   }
 
   // Display the first page
-  params.append('page', '1')
+  params.append('page', page.toString())
 
   // that each page will have 5 items
   params.append('per_page', '5')
